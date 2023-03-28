@@ -2,6 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
+<script src="popper.min.js"></script>
 <script src="bootstrap.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
 <!---
@@ -491,6 +492,24 @@ function setImageComposition(select){
             Text-to-image generative models have enabled high-resolution image synthesis across different domains, but require users to specify the content they wish to generate. In this paper, we consider the inverse problem -- given a collection of different images, can we discover the underlying generative concepts that represent each image? We present an approach to decompose and represent images into a set of different components, disentangling different art styles in paintings, objects, and lighting from kitchen scenes, and discovering image classes given ImageNet images. We illustrate how such discovered concepts accurately represent the underlying content of images and illustrate how they may further be composed with other concepts to construct new artistic and hybrid images.
             </p>
         </div>
+    </section>
+
+    <section id="Method"/>
+        <hr>
+        <h2>Method</h2>
+        <div class="flex-row">
+            <p>We discover a set of compositional concepts given a dataset of unlabeled images. Score functions representing each concept $\{c_1, \dots, c_K\}$ are composed together to form a compositional score function that is trained to denoise images. The inferred concepts can be used to generate new images.
+            </p>
+        </div>
+        <center>
+            <figure>
+                <video class="centered" width="100%" autoplay="" loop="" muted="" playsinline="">
+                    <source src="materials/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </figure>
+
+        </center>
     </section>
 
     <section id="results">
