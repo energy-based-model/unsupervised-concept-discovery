@@ -432,6 +432,32 @@ function setImageComposition(select){
    var image = document.getElementsByName("image-swap-composition")[0];
    image.src = select.options[select.selectedIndex].value;
 }
+
+var videos = document.querySelectorAll('video');
+
+// Create a promise to wait all videos to be loaded at the same time.
+// When all of the videos are ready, call resolve().
+var promise = new Promise(function(resolve) {
+  var loaded = 0;
+
+  videos.forEach(function(v) {
+    v.addEventListener('loadedmetadata', function() {
+      loaded++;
+
+      if (loaded === videos.length) {
+        resolve();
+      }
+    });
+  });
+});
+
+// Play all videos one by one only when all videos are ready to be played.
+promise.then(function() {
+  videos.forEach(function(v) {
+    v.play();
+  });
+});
+
 </script>
 
 <div class="container">
@@ -476,8 +502,16 @@ function setImageComposition(select){
     <section id="teaser-image">
         <center>
             <figure>
-                <video class="centered" width="100%" autoplay loop muted playsinline class="video-background">
-                    <source src="materials/teaser.m4v" type="video/mp4">
+                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
+                    <source src="materials/imagenet_teaser.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
+                    <source src="materials/ADE_teaser.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
+                    <source src="materials/style_teaser.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </figure>
@@ -595,6 +629,21 @@ function setImageComposition(select){
         </div>
         </div>
 
+        <div class="row vspace-top">
+        <div class="col-sm-3">
+            <video width="100%" playsinline="" autoplay="" loop="" preload="" muted="">
+                <source src="materials/related/comet.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="col-sm-9">
+          <div class="paper-title">
+            <a href="https://energy-based-model.github.io/comet/">Unsupervised Learning of Compositional Energy Concepts</a>
+        </div>
+        <div>
+            We propose COMET, which discovers and represents concepts as separate energy functions, enabling us to represent both global concepts as well as objects under a unified framework. COMET discovers energy functions through recomposing the input image, which we find captures independent factors without additional supervision.
+        </div>
+        </div>
+        </div>
 
         <div class="row vspace-top">
         <div class="col-sm-3">
@@ -611,6 +660,22 @@ function setImageComposition(select){
             diffusion models with EBMs. We illustrate how compositional operators enable
             the ability to composing multiple sets of objects together as well as generate images subject to 
             complex text prompts.
+        </div>
+        </div>
+        </div>
+
+        <div class="row vspace-top">
+        <div class="col-sm-3">
+            <video width="100%" playsinline="" autoplay="" loop="" preload="" muted="">
+                <source src="materials/related/clevr_teaser.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="col-sm-9">
+          <div class="paper-title">
+            <a href="https://composevisualrelations.github.io/">CLearning to Compose Visual Relations</a>
+        </div>
+        <div>
+            The visual world around us can be described as a structured set of objects and their associated relations. In this work, we propose to represent each relation as an unnormalized density (an energy-based model), enabling us to compose separate relations in a factorized manner. We show that such a factorized decomposition allows the model to both generate and edit scenes that have multiple sets of relations more faithfully.
         </div>
         </div>
         </div>
