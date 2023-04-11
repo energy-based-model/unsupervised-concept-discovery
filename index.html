@@ -437,9 +437,20 @@ pre {
    image.src = select.options[select.selectedIndex].value;
 }
 function setImageComposition(select){
-   var image = document.getElementsByName("image-swap-composition")[0];
+   var image = document.querySelectorAll("#teaser-image video");
    image.src = select.options[select.selectedIndex].value;
 }
+
+function playAll() {
+  var videos = document.getElementsByTagName("video");
+  for(var i=0; i<videos.length; i++) {
+    videos[i].play();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  playAll();
+});
 
 </script>
 
@@ -483,22 +494,22 @@ function setImageComposition(select){
     </div>
 
     <section id="teaser-image">
-        <center>
-            <figure>
-                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
-                    <source src="materials/imagenet_teaser.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
-                    <source src="materials/ADE_teaser.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
-                    <source src="materials/style_teaser.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </figure>
-        </center>
+      <center>
+        <figure>
+          <video class="centered" width="100%" muted playsinline class="video-background">
+            <source src="materials/imagenet_teaser.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video class="centered" width="100%" muted playsinline class="video-background">
+            <source src="materials/ADE_teaser.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <video class="centered" width="100%" muted playsinline class="video-background">
+            <source src="materials/style_teaser.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </figure>
+      </center>
     </section>
 
     <section id="abstract"/>
