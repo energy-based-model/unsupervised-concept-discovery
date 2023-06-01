@@ -441,17 +441,6 @@ function setImageComposition(select){
    image.src = select.options[select.selectedIndex].value;
 }
 
-function playAll() {
-  var videos = document.getElementsByTagName("video");
-  for(var i=0; i<videos.length; i++) {
-    videos[i].play();
-  }
-}
-
-window.addEventListener('DOMContentLoaded', (event) => {
-  playAll();
-});
-
 </script>
 
 <div class="container">
@@ -496,7 +485,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     <section id="teaser-image">
       <center>
         <figure>
-          <video class="centered" width="100%" preload autoplay loop muted class="video-background">
+          <video class="centered" width="100%" autoplay loop muted>
             <source src="materials/unsupervised_discovery_teaser.m4v" type="video/mp4">
             Your browser does not support the video tag.
           </video>
