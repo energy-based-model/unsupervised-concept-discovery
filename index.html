@@ -406,6 +406,25 @@ pre {
   }
 }
 
+.figure {
+    position: relative;
+    width: 360px; /* can be omitted for a regular non-lazy image */
+    max-width: 100%;
+  }
+  .figure img.Sirv.image-hover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .figure:hover img.Sirv.image-hover {
+    opacity: 1;
+  }
+
 </style>
 <link rel="stylesheet" href="bootstrap-grid.css">
 <script type="text/javascript" src="../js/hidebib.js"></script>
@@ -525,7 +544,7 @@ function setImageComposition(select){
         <hr>
         <h2>Object Decomposition</h2>
             <div class="flex-row">
-                <p>Our method can <b>decompose</b> a set of unlabeled images from into objects without using any labels.
+                <p>Our method can decompose a set of unlabeled images from into objects without using any labels.
                 </p>
             </div>
             <div class="row">
@@ -568,11 +587,172 @@ function setImageComposition(select){
         <h2>Indoor Scene Decomposition</h2>
             <div class="flex-row">
                 <p>Our method can decompose the kitchen scenes into kitchen range (i.e., stove and microwave), cabinets, and lighting effects.
+                    <b>Note that we name each concept based on attention responses for easy visualization.</b> <u>Hover to the image to visualize attention responses.</u>
                 </p>
             </div>
-            <div class="row">
-                <div class="col justify-content-center text-center">
-                    <img src="materials/decomposition/kitchen_decomposition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
+            <h3 style="text-align: center;">Kitchen Range</h3>
+            <div class="container bg-3">
+                <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_1.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_1_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_2.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_2_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_3.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_3_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_4.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_4_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_5.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_5_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_6.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t1_6_attn.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <h3 style="text-align: center;">Kitchen Island</h3>
+            <div class="container bg-3">
+                <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_1.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_1_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_2.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_2_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_3.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_3_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_4.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_4_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_5.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_5_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_6.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t4_6_attn.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <h3 style="text-align: center;">Lighting</h3>
+            <div class="container bg-3">
+                <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_1.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_1_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_2.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_2_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_3.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_3_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_4.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_4_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_5.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_5_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_6.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t3_6_attn.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <h3 style="text-align: center;">Silver Handles</h3>
+            <div class="container bg-3">
+                <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_1.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_1_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_2.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_2_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_3.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_3_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_4.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_4_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_5.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_5_attn.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="figure">
+                            <img class="Sirv image-main img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_6.png" alt="">
+                            <img class="Sirv image-hover img-fluid" src="materials/decomposition/ADE20K_decomposition/t5_6_attn.png" alt="">
+                        </div>
+                    </div>
                 </div>
             </div>
         <hr>
