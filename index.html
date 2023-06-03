@@ -553,37 +553,7 @@ function setImageComposition(select){
                 </div>
             </div>
         <hr>
-<!--        <h2>Composing Discovered Concepts</h2>-->
-<!--            <div class="flex-row">-->
-<!--                <p>After a set of factors is discovered from a collection of images, our method can further enable compositional generation using compositional operators from <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">composable diffusion</a>.-->
-<!--                    <b>Note that concept names (no quotation marks) are provided by us for easy understanding since we discover concepts without knowing the labels.</b>-->
-<!--                </p>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm-12 text-center">-->
-<!--                    <div class="section">-->
-<!--                        <div class="section" style="text-align: center">-->
-<!--                            <span><strong>Composition Options: </strong></span>-->
-<!--                            <label for="composition">-->
-<!--                                <select id='composition' class="dropselect" style="text-align: center" name="composition" onchange="setImageComposition(this);">-->
-<!--                                    <option value="materials/composition/imagenet_composition.png">Object Composition</option>-->
-<!--                                    <option value="materials/composition/ade20k_composition.png">Kitchen Scene Composition</option>-->
-<!--                                    <option value="materials/composition/art_composition.png">Artistic Content Composition</option>-->
-<!--                                    <option value="materials/composition/external_composition.png" selected="">External Composition</option>-->
-<!--                                </select>-->
-<!--                            </label>-->
-<!--                        </div>-->
-<!--                        <div class="row align-items-center">-->
-<!--                            <div class="col justify-content-center text-center">-->
-<!--                                <img src="materials/composition/external_composition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap-composition">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-    </section>
 
-    <section id="results">
         <h2>Indoor Scene Decomposition</h2>
             <div class="flex-row">
                 <p>Our method can decompose the kitchen scenes into kitchen range (i.e., stove and microwave), kitchen island, and lighting effects.
@@ -756,12 +726,10 @@ function setImageComposition(select){
                 </div>
             </div>
         <hr>
-    </section>
 
-    <section id="results">
-        <h2>Artistic Concept Decomposition</h2>
+            <h2>Artistic Concept Decomposition</h2>
             <div class="flex-row">
-                <p>Our method can decompose artistic paininings into artistic components.
+                <p>Our method can decompose paintings from artists into artistic components.
                 </p>
             </div>
             <div class="row">
@@ -769,8 +737,20 @@ function setImageComposition(select){
                     <img src="materials/decomposition/art_decomposition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
                 </div>
             </div>
-    </section>
 
+        <hr>
+            <h2>Composing Discovered Concepts</h2>
+            <div class="flex-row">
+                <p>After a set of factors is discovered from a collection of images, our method can further enable compositional generation using compositional operators from <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">composable diffusion</a>.
+                    <b>Note that concept names (no quotation marks) are provided by us for easy understanding since we discover concepts without knowing the labels.</b>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col justify-content-center text-center">
+                    <img src="materials/composition/composition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
+                </div>
+            </div>
+    </section>
 
     <section id="related_projects">
         <hr>
