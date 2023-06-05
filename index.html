@@ -1,566 +1,236 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models</title>
 
-<script src="popper.min.js"></script>
-<script src="bootstrap.js"></script>
-<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
-<!---
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
---->
-<script src="load-mathjax.js" async></script>
-
-
-<style type="text/css">
-body {
-    font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
-    font-size: 17px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media screen and (min-width: 980px){
-    body {
-        width: 980px;
-    }
-}
-
-
-h1 {
-    font-weight:300;
-    line-height: 1.15em;
-}
-
-h2 {
-    font-size: 1.75em;
-}
-a:link,a:visited {
-    color: #5364cc;
-    text-decoration: none;
-}
-a:hover {
-    color: #208799;
-}
-h1 {
-    text-align: center;
-}
-h2,h3 {
-    text-align: left;
-}
-
-h1 {
-    font-size: 40px;
-    font-weight: 500;
-}
-h2 {
-    font-weight: 400;
-    margin: 16px 0px 4px 0px;
-}
-h3 {
-    font-weight: 600;
-    margin: 16px 0px 4px 0px;
-}
-
-.paper-title {
-    padding: 1px 0px 1px 0px;
-}
-section {
-    margin: 32px 0px 32px 0px;
-    text-align: justify;
-    clear: both;
-}
-.col-5 {
-     width: 20%;
-     float: left;
-}
-
-.move-down {
-    margin-top:1.2cm;
-}
-
-.col-4 {
-     width: 25%;
-     float: left;
-}
-.col-3 {
-     width: 33%;
-     float: left;
-}
-.col-2 {
-     width: 50%;
-     float: left;
-}
-.col-1 {
-     width: 100%;
-     float: left;
-}
-
-.author-row, .affil-row {
-    font-size: 26px;
-}
-
-.author-row-new { 
-    text-align: center; 
-}
-
-.author-row-new a {
-    display: inline-block;
-    font-size: 20px;
-    padding: 4px;
-}
-
-.author-row-new sup {
-    color: #313436;
-    font-size: 12px;
-}
-
-.affiliations-new {
-    font-size: 18px;
-    text-align: center;
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-}
-
-.row {
-    margin: 16px 0px 16px 0px;
-}
-.authors {
-    font-size: 26px;
-}
-.affiliatons {
-    font-size: 18px;
-}
-.affil-row {
-    margin-top: 18px;
-}
-.teaser {
-    max-width: 100%;
-}
-.text-center {
-    text-align: center;  
-}
-.screenshot {
-    width: 256px;
-    border: 1px solid #ddd;
-}
-.screenshot-el {
-    margin-bottom: 16px;
-}
-hr {
-    height: 1px;
-    border: 0; 
-    border-top: 1px solid #ddd;
-    margin: 0;
-}
-.material-icons {
-    vertical-align: -6px;
-}
-p {
-    line-height: 1.25em;
-}
-.caption {
-    font-size: 16px;
-    color: #666;
-    margin-top: 4px;
-    margin-bottom: 10px;
-	text-align: left;
-}
-
-
-video {
-    display: block;
-    margin: auto;
-}
-
-
-figure {
-    display: block;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-#bibtex pre {
-    font-size: 14px;
-    background-color: #eee;
-    padding: 16px;
-}
-.blue {
-    color: #2c82c9;
-    font-weight: bold;
-}
-.orange {
-    color: #d35400;
-    font-weight: bold;
-}
-.flex-row {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.paper-btn-coming-soon {
-    position: relative; 
-    top: 0;
-    left: 0;
-}
-
-.coming-soon {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-}
-
-.center {
-  margin-left: 10.0%;
-  margin-right: 10.0%;
-}
-
-.paper-btn {
-  position: relative;
-  text-align: center;
-
-  display: inline-block;
-  margin: 8px;
-  padding: 8px 8px;
-
-  border-width: 0;
-  outline: none;
-  border-radius: 2px;
-  
-  background-color: #5364cc;
-  color: white !important;
-  font-size: 20px;
-  width: 100px;
-  font-weight: 600;
-}
-.paper-btn-parent {
-    display: flex;
-    justify-content: center;
-    margin: 16px 0px;
-}
-
-.paper-btn:hover {
-    opacity: 0.85;
-}
-
-.container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-.venue {
-    font-size: 23px;
-}
-
-.topnav {
-    background-color: #EEEEEE;
-    overflow: hidden;
-}
-
-.topnav div {
-    max-width: 1070px;
-    margin: 0 auto;
-}
-
-.topnav a {
-    display: inline-block;
-    color: black;
-    text-align: center;
-    vertical-align: middle;
-    padding: 16px 16px;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.topnav img {
-    padding: 2px 0px;
-    width: 100%;
-    margin: 0.2em 0px 0.3em 0px;
-    vertical-align: middle;
-}
-
-pre {
-    font-size: 0.9em;
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    border-radius: 3px;
-    background-color: rgb(235, 235, 235);
-    overflow-x: auto;
-}
-
-.download-thumb {
-    display: flex;
-}
-
-@media only screen and (max-width: 620px) {
-    .download-thumb {
-        display: none;
-    }
-}
-
-.paper-stuff {
-    width: 50%;
-    font-size: 20px;
-}
-
-@media only screen and (max-width: 620px) {
-    .paper-stuff {
-        width: 100%;
-    }
-}
-* {
-  box-sizing: border-box;
-}
-
-.column {
-  text-align: center;
-  float: left;
-  width: 16.666%;
-  padding: 5px;
-}
-.column3 {
-  text-align: center;
-  float: left;
-  width: 33.333%;
-  padding: 5px;
-}
-.column4 {
-  text-align: center;
-  float: left;
-  width: 50%;
-  padding: 5px;
-}
-.column5 {
-  text-align: center;
-  float: left;
-  width: 20%;
-  padding: 5px;
-}
-.column10 {
-  text-align: center;
-  float: left;
-  width: 10%;
-  padding: 5px;
-}
-.border-right {
-    border-right: 1px solid black;
-}
-.border-bottom{
-    border-bottom: 1px solid black;
-}
-
-
-.row-center {
-    margin: 16px 0px 16px 0px;
-    text-align: center;
-}
-
-/* Clearfix (clear floats) */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-.figure-img {
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-
-
-
-
-
-
-
-.rounded-circle {
-  border-radius: 50% !important;
-}
-
-
-
-
-
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 500px) {
-  .column {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 500px) {
-  .column3 {
-    width: 100%;
-  }
-}
-
-.figure {
-    position: relative;
-    width: 360px; /* can be omitted for a regular non-lazy image */
-    max-width: 100%;
-  }
-  .figure img.Sirv.image-hover {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    object-fit: contain;
-    opacity: 0;
-    transition: opacity .2s;
-  }
-  .figure:hover img.Sirv.image-hover {
-    opacity: 1;
-  }
-
-</style>
-<link rel="stylesheet" href="bootstrap-grid.css">
-<script type="text/javascript" src="../js/hidebib.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic' rel='stylesheet' type='text/css'>
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3593LNYVK9"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-3593LNYVK9');
-        </script>
-        <title>Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta property="og:description" content="Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models"/>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:creator" content="@nanliuuu">
-        <meta name="twitter:title" content="Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models">
-        <meta name="twitter:description" content="">
-        <meta name="twitter:image" content="">
-    </head>
- <body>
-
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3593LNYVK9"></script>
 <script>
- function setImage(select){
-   var image = document.getElementsByName("image-swap")[0];
-   image.src = select.options[select.selectedIndex].value;
-}
-function setImageComposition(select){
-   var image = document.querySelectorAll("#teaser-image video");
-   image.src = select.options[select.selectedIndex].value;
-}
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-3593LNYVK9');
 </script>
 
-<div class="container">
-    <div class="paper-title">
-        <h1>
-            Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models
-        </h1>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="stylesheet" href="bootstrap-grid.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="load-mathjax.js" async></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://nanliu.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">
+            Composable Diffusion
+          </a>
+          <a class="navbar-item" href="https://energy-based-model.github.io/comet/">
+            COMET
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div id="authors">
-        <center>
-            <div class="author-row-new">
-                <a href="https://nanliu.io/">Nan Liu<sup>1*</sup></a>,
-                <a href="https://yilundu.github.io/">Yilun Du<sup>2*</sup></a>,
-                <a href="https://people.csail.mit.edu/lishuang/">Shuang Li<sup>2*</sup></a>,
-                <a href="https://scholar.google.com/citations?user=rRJ9wTJMUB8C&hl=en">Joshua B. Tenenbaum<sup>2</sup></a>,
-                <a href="https://groups.csail.mit.edu/vision/torralbalab/">Antonio Torralba<sup>2</sup></a>
-            </div>
-            <div class="affiliations">
-                <span><sup>1</sup> UIUC</span>
-                <span><sup>2</sup> MIT</span>
-            </div>
-            <div class="affil-row">
-                <div class="venue text-center"><b>arXiv 2023 </b></div>
-            </div>
-        </center>
+  </div>
+</nav>
 
-        <div style="clear: both">
-            <div class="paper-btn-parent">
-            <a class="paper-btn" href="">
-                <span class="material-icons"> description </span> 
-                 Paper
-            </a>
-            <a class="paper-btn" href="https://github.com/nanlliu/Unsupervised-Compositional-Concepts-Discovery">
-                <span class="material-icons"> code </span>
-                Code
-            </a>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://nanliu.io/">Nan Liu</a><sup>*1</sup>,</span>
+            <span class="author-block">
+              <a href="https://yilundu.github.io/">Yilun Du</a><sup>*2</sup>,</span>
+            <span class="author-block">
+              <a href="https://people.csail.mit.edu/lishuang/">Shuang Li</a><sup>*2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://web.mit.edu/cocosci/josh.html">Joshua B. Tenenbaum</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://groups.csail.mit.edu/vision/torralbalab/">Antonio Torralba</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>UIUC,</span>
+            <span class="author-block"><sup>2</sup>MIT</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://energy-based-model.github.io/unsupervised-concept-discovery"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://energy-based-model.github.io/unsupervised-concept-discovery"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/nanlliu/Unsupervised-Compositional-Concepts-Discovery"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
             </div>
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <section id="teaser-image">
-      <center>
-        <figure>
-          <video class="centered" width="100%" autoplay loop muted>
-            <source src="materials/unsupervised_discovery_teaser.m4v" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </figure>
-      </center>
-    </section>
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="materials/unsupervised_discovery_teaser.m4v"
+                type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
 
-    <section id="abstract"/>
-        <hr>
-        <h2>Abstract</h2>
-        <div class="flex-row">
-            <p>
-            Text-to-image generative models have enabled high-resolution image synthesis across different domains, but require users to specify the content they wish to generate. In this paper, we consider the inverse problem -- given a collection of different images, can we discover the underlying generative concepts that represent each image? We present an approach to decompose and represent images into a set of different components, disentangling different art styles in paintings, objects, and lighting from kitchen scenes, and discovering image classes given ImageNet images. We illustrate how such discovered concepts accurately represent the underlying content of images and illustrate how they may further be composed with other concepts to construct new artistic and hybrid images.
-            </p>
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Text-to-image generative models have enabled high-resolution image synthesis across different domains,
+            but require users to specify the content they wish to generate.
+            In this paper, we consider the inverse problem -- given a collection of different images,
+            can we discover the generative concepts that represent each image?
+            We present an unsupervised approach to discover generative concepts from a collection of images,
+            disentangling different art styles in paintings, objects, and lighting from kitchen scenes, and
+            discovering image classes given ImageNet images. We show how such generative concepts can accurately represent the content of images,
+            be recombined and composed to generate new artistic and hybrid images and be further used as a representation for downstream classification tasks.
+          </p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="Method"/>
-        <hr>
-        <h2>Method</h2>
-        <div class="flex-row">
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
             <p>We discover a set of compositional concepts given a dataset of unlabeled images. Score functions representing each concept $\{c^1, \dots, c^K\}$ are composed together to form a compositional score function that is trained to denoise images. The inferred concepts can be used to generate new images.
-            </p>
+          </p>
+        <video autoplay muted loop playsinline height="100%">
+          <source src="materials/demo.mp4" type="video/mp4">
+        </video>
         </div>
-        <center>
-            <figure>
-                <video class="centered" width="100%" autoplay  muted playsinline class="video-background">
-                    <source src="materials/demo.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </figure>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
 
-        </center>
-    </section>
 
-    <section id="results">
-        <hr>
-        <h2>Object Decomposition</h2>
-            <div class="flex-row">
-                <p>Our method can decompose a set of unlabeled images from into objects without using any labels.
-                </p>
-            </div>
-            <div class="row">
-                <div class="col justify-content-center text-center">
-                    <img src="materials/decomposition/imagenet_decomposition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
-                </div>
-            </div>
-        <hr>
+<section class="section">
+  <div class="container is-max-desktop">
 
-        <h2>Indoor Scene Decomposition</h2>
-            <div class="flex-row">
-                <p>Our method can decompose the kitchen scenes into kitchen range (i.e., stove and microwave), kitchen island, and lighting effects.
+    <!-- Animation. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Object Decomposition</h2>
+
+        <div class="content has-text-justified has-text-centered">
+          <p>
+            Our method can decompose a set of unlabeled images from into objects without using any labels.
+          </p>
+        </div>
+        <img src="materials/decomposition/imagenet_decomposition.png"
+             alt="Object Decomposition."/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Indoor Scene Decomposition</h2>
+
+        <div class="content has-text-justified has-text-centered">
+          <p>Our method can decompose the kitchen scenes into kitchen range (i.e., stove and microwave), kitchen island, and lighting effects.
                     <b>Note that we name each concept based on attention responses for easy visualization.</b> <u>Hover to image to visualize attention heat maps.</u>
                 </p>
-            </div>
-            <h4 style="text-align: center;">Kitchen Range</h4>
+        </div>
+
+        <h3 class="title is-6">Kitchen Range</h3>
             <div class="container bg-3">
                 <div class="row">
                     <div class="col-sm-2 text-center">
@@ -601,7 +271,8 @@ function setImageComposition(select){
                     </div>
                 </div>
             </div>
-        <h4 style="text-align: center;">Kitchen Island</h4>
+            <br>
+        <h3 class="title is-6">Kitchen Island</h3>
             <div class="container bg-3">
                 <div class="row">
                     <div class="col-sm-2 text-center">
@@ -642,8 +313,8 @@ function setImageComposition(select){
                     </div>
                 </div>
             </div>
-
-        <h4 style="text-align: center;">Lighting Effects</h4>
+            <br>
+        <h3 class="title is-6">Lighting Effects</h3>
             <div class="container bg-3">
                 <div class="row">
                     <div class="col-sm-2 text-center">
@@ -684,7 +355,8 @@ function setImageComposition(select){
                     </div>
                 </div>
             </div>
-        <h4 style="text-align: center;">Silver</h4>
+            <br>
+        <h3 class="title is-6">Silver</h3>
             <div class="container bg-3">
                 <div class="row">
                     <div class="col-sm-2 text-center">
@@ -725,136 +397,86 @@ function setImageComposition(select){
                     </div>
                 </div>
             </div>
-        <hr>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <h2>Artistic Concept Decomposition</h2>
-            <div class="flex-row">
-                <p>Our method can decompose paintings from artists into artistic components.
-                </p>
-            </div>
-            <div class="row">
-                <div class="col justify-content-center text-center">
-                    <img src="materials/decomposition/art_decomposition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
-                </div>
-            </div>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Artistic Concept Decomposition</h2>
 
-        <hr>
-            <h2>Composing Discovered Concepts</h2>
-            <div class="flex-row">
-                <p>After a set of factors is discovered from a collection of images, our method can further enable compositional generation using compositional operators from <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">composable diffusion</a>.
+        <div class="content has-text-justified has-text-centered">
+          <p>
+            Our method can decompose paintings from artists into artistic components.
+          </p>
+        </div>
+        <img src="materials/decomposition/art_decomposition.png"
+             alt="Artistic Concept Decomposition."/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Composing Discovered Concepts</h2>
+
+        <div class="content has-text-justified has-text-centered">
+          <p>After a set of factors is discovered from a collection of images, our method can further enable compositional generation using compositional operators from <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">composable diffusion</a>.
                     <b>Note that concept names (no quotation marks) are provided by us for easy understanding since we discover concepts without knowing the labels.</b>
                 </p>
-            </div>
-            <div class="row">
-                <div class="col justify-content-center text-center">
-                    <img src="materials/composition/composition.png" class="img-fluid" alt="" style="width:100%; height:100%" name="image-swap">
-                </div>
-            </div>
-    </section>
+        </div>
+        <img src="materials/composition/composition.png"
+             alt="Composition."/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="related_projects">
-        <hr>
-        <h2>Related Projects</h2>  
-
-          <br>
-          Check out a list of our related papers on compositional generation and energy based models. A full list can be found <a href="https://energy-based-model.github.io/Energy-based-Model-MIT/">here</a>!
-          <br>
-
-        <div class="row vspace-top">
-        <div class="col-sm-3">
-            <video width="100%" playsinline="" autoplay="" preload="" muted="">
-                <source src="materials/related/recyle.m4v" type="video/mp4">
-            </video>
-        </div>
-        <div class="col-sm-9">
-          <div class="paper-title">
-            <a href="https://energy-based-model.github.io/reduce-reuse-recycle/">Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC</a>
-        </div>
-        <div>
-            We propose new samplers, inspired by MCMC, to enable successful compositional generation. Further, we propose an energy-based parameterization of diffusion models which enables the use of new compositional operators and more sophisticated, Metropolis-corrected samplers.
-        </div>
-        </div>
-        </div>
-
-        <div class="row vspace-top">
-        <div class="col-sm-3">
-            <video width="100%" playsinline="" autoplay="" preload="" muted="">
-                <source src="materials/related/comet.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="col-sm-9">
-          <div class="paper-title">
-            <a href="https://energy-based-model.github.io/comet/">Unsupervised Learning of Compositional Energy Concepts</a>
-        </div>
-        <div>
-            We propose COMET, which discovers and represents concepts as separate energy functions, enabling us to represent both global concepts as well as objects under a unified framework. COMET discovers energy functions through recomposing the input image, which we find captures independent factors without additional supervision.
-        </div>
-        </div>
-        </div>
-
-        <div class="row vspace-top">
-        <div class="col-sm-3">
-            <video width="100%" playsinline="" autoplay="" preload="" muted="">
-                <source src="materials/related/teaser_glide.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="col-sm-9">
-          <div class="paper-title">
-            <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/">Compositional Visual Generation with Composable Diffusion Models</a>
-        </div>
-        <div>
-            We present a method to compose different diffusion models together, drawing on the close connection of
-            diffusion models with EBMs. We illustrate how compositional operators enable
-            the ability to composing multiple sets of objects together as well as generate images subject to 
-            complex text prompts.
-        </div>
-        </div>
-        </div>
-
-        <div class="row vspace-top">
-        <div class="col-sm-3">
-            <video width="100%" playsinline="" autoplay="" preload="" muted="">
-                <source src="materials/related/clevr_teaser.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="col-sm-9">
-          <div class="paper-title">
-            <a href="https://composevisualrelations.github.io/">Learning to Compose Visual Relations</a>
-        </div>
-        <div>
-            The visual world around us can be described as a structured set of objects and their associated relations. In this work, we propose to represent each relation as an unnormalized density (an energy-based model), enabling us to compose separate relations in a factorized manner. We show that such a factorized decomposition allows the model to both generate and edit scenes that have multiple sets of relations more faithfully.
-        </div>
-        </div>
-        </div>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content column is-four-fifths ">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{liu2023unsup,
+  author    = {Liu, Nan and Du, Yilun and Li, Shuang and Tenenbaum, Joshua B. and Torralba, Antonio},
+  title     = {Unsupervised Compositional Concepts Discovery with Text-to-Image Generative Models},
+  journal   = {Arxiv},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
 
 
-        <div class="row vspace-top">
-        <div class="col-sm-3">
-            <div class="move-down">
-                <img src="materials/related/comp_cartoon.png" class="img-fluid" alt="comp_carton" style="width:100%">
-            </div>
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/nanlliu/Unsupervised-Compositional-Concepts-Discovery" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered">
+        <div class="content">
+          <p>
+            This website is forked from the
+						<a href="https://nerfies.github.io/">Nerfies</a> and
+						<a href="https://github.com/nerfies/nerfies.github.io">source code</a>
+          </p>
         </div>
-        <div class="col-sm-9">
-          <div class="paper-title">
-            <a href="https://energy-based-model.github.io/compositional-generation-inference/">Compositional Visual Generation with Energy Based Models</a>
-        </div>
-        <div>
-            We present a set of compositional operators that enable EBMs to exhibit <b>zero-shot compositional</b> visual generation, enabling us to compose visual concepts
-            (through operators of conjunction, disjunction, or negation) together in a zero-shot manner.
-            Our approach enables us to generate faces given a  description
-            ((Smiling AND Female) OR (NOT Smiling AND Male)) or to combine several different objects together.
-        </div>
-        </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    <section>
-        This webpage template was recycled from <a href='https://nv-tlabs.github.io/LION/'>here</a>.
-        <center><p><a href='https://accessibility.mit.edu/'><b>Accessibility</b></a></p></center>
-    </section>
-    
-
-
-</div>
 </body>
 </html>
